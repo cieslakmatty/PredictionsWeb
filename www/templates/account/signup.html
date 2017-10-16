@@ -1,0 +1,29 @@
+<form name=signUpForm ng-submit="signUpSubmit()">
+    <md-input-container>
+        <label>Username:</label>
+        <input name="username" type="text" ng-model="signUpData.username" required maxlength="20" minlength="6" />
+    </md-input-container>
+    <div ng-messages="signUpForm.username.$error" role="alert">
+        <!--<div ng-message="required">Please enter a value for this field.</div>
+        <div ng-message-exp="['minlength', 'maxlength']">Username length must be between 6 and 20 characters.</div>-->
+    </div>
+
+    <md-input-container>
+        <label>Password:</label>
+        <input name="password" type="password" ng-model="signUpData.password" />
+    </md-input-container>
+    <div ng-messages="signUpForm.password.$error" role="alert">
+        <!--<div ng-message="required">Please enter a value for this field.</div>-->
+    </div>
+
+    <md-input-container>
+        <label>Reenter password:</label>
+        <input name="confirmPassword" type="password" ng-model="signUpData.confirmPassword" ng-pattern="signUpData.password" />
+    </md-input-container>
+    <br>
+    <div ng-messages="signUpForm.confirmPassword.$error" role="alert">
+        <!--<div ng-message="required">Please enter a value for this field.</div>-->
+        <div ng-message="pattern">Passwords must be the same.</div>
+    </div>
+    <md-button type="submit" class="md-raised md-primary">Signup</md-button>
+</form>
