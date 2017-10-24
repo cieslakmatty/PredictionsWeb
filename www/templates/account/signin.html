@@ -1,7 +1,7 @@
 <form name=signInForm ng-submit="signInSubmit()">
     <md-input-container>
         <label>Username:</label>
-        <input name="username" type="text" ng-model="signinData.username" required/>
+        <input name="username" type="text" ng-model="signInData.username" required/>
     </md-input-container>
     <div ng-messages="signInForm.username.$error" role="alert">
         <!--<div ng-message="required">Please enter a value for this field.</div>-->
@@ -9,14 +9,14 @@
 
     <md-input-container>
         <label>Password:</label>
-        <input name="password" type="password" ng-model="signinData.password" required/>
+        <input name="password" type="password" ng-model="signInData.password" required/>
     </md-input-container>
     <div ng-messages="signInForm.password.$error" role="alert">
         <!--<div ng-message="required">Please enter a value for this field.</div>-->
     </div>
 
     <md-input-container>
-        <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="signinData.remember" class="md-primary">
+        <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="signInData.remember" class="md-primary">
             Remember me?
         </md-checkbox>
     </md-input-container>

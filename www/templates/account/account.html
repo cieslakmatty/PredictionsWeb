@@ -1,14 +1,14 @@
 <div ng-controller="accountController">
     <md-content class="md-padding">
         <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-            <md-nav-item md-nav-click="goto('login')" name="login">
-                Login
+            <md-nav-item md-nav-click="goto('signin')" name="signin">
+                Signin
             </md-nav-item>
             <md-nav-item md-nav-click="goto('signup')" name="signup">
                 Signup
             </md-nav-item>
         </md-nav-bar>
-        <div login ng-if="bool_login"></div>
-        <div signup ng-if="!bool_login"></div>
+        <div signin ng-if="bool_signin"></div>
+        <div signup ng-if="!bool_signin"></div>
     </md-content>
 </div>

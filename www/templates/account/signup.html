@@ -1,7 +1,7 @@
 <form name=signUpForm ng-submit="signUpSubmit()">
     <md-input-container>
         <label>Username:</label>
-        <input name="username" type="text" ng-model="signUpData.username" required maxlength="20" minlength="6" />
+        <input name="username" type="text" ng-model="signUpData.username" required maxlength="20" minlength="6" required/>
     </md-input-container>
     <div ng-messages="signUpForm.username.$error" role="alert">
         <!--<div ng-message="required">Please enter a value for this field.</div>
@@ -10,7 +10,7 @@
 
     <md-input-container>
         <label>Password:</label>
-        <input name="password" type="password" ng-model="signUpData.password" />
+        <input name="password" type="password" ng-model="signUpData.password" required/>
     </md-input-container>
     <div ng-messages="signUpForm.password.$error" role="alert">
         <!--<div ng-message="required">Please enter a value for this field.</div>-->
@@ -18,7 +18,7 @@
 
     <md-input-container>
         <label>Reenter password:</label>
-        <input name="confirmPassword" type="password" ng-model="signUpData.confirmPassword" ng-pattern="signUpData.password" />
+        <input name="confirmPassword" type="password" ng-model="signUpData.confirmPassword" ng-pattern="signUpData.password" required/>
     </md-input-container>
     <br>
     <div ng-messages="signUpForm.confirmPassword.$error" role="alert">

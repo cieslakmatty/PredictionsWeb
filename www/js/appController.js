@@ -3,6 +3,8 @@
 
 var app = angular.module('myApp', ['ngAnimate', 'ngMaterial', 'ngMessages', 'ngRoute']);
 
+var serverUrl = "localhost:8080/";
+
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
