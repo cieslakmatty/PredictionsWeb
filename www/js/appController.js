@@ -4,17 +4,38 @@
 var app = angular.module('myApp', ['ngAnimate', 'ngMaterial', 'ngMessages', 'ngRoute']);
 
 var serverUrl = "localhost:8080/";
+var loggedIn = false;
 
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
             templateUrl: "templates/account/account.html",
-            controller : "accountController"
+            controller: "accountController"
         }).when("/main", {
             templateUrl: "templates/main/mainApp.html",
-            controller : "mainController"
+            controller: "mainController"
         })
 });
 
-app.controller("appController", function ($scope) {
+app.controller("appController", function ($scope, $mdSidenav) {
+    $scope.toggleLeft = function () {
+        if (loggedIn)
+            $mdSidenav('left').toggle();
+    }
+
+    $scope.openLeft = function () {
+        if (loggedIn)
+            $mdSidenav('left').open();
+    }
+
+    $scope.closeLeft = function () {
+        if (loggedIn)
+            $mdSidenav('left').close();
+    }
 });
+
+app.controller('sidenavController', function ($scope, $mdSidenav) {
+    $scope.close = function () {
+        $mdSidenav('left').close();
+    };
+})

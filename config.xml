@@ -4,7 +4,7 @@
     <description>
         A PredictionsWeb AngularJS implmentation.
     </description>
-    <author email="cieslakmatty@gmail.com" href="#">
+    <author email="cieslakmatty@gmail.com">
         Mateusz Cieslak
     </author>
     <content src="index.html" />
@@ -19,8 +19,8 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <preference name="windows-target-version" value="10.0" />
-    <engine name="android" spec="^6.3.0" />
     <engine name="browser" spec="^5.0.0" />
     <engine name="windows" spec="^5.0.0" />
+    <engine name="android" spec="^6.3.0" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
 </widget>
