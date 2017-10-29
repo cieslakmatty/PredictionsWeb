@@ -1,22 +1,22 @@
 import json
-import tornado.websocket
+import tornado.web
 from tornado.escape import json_encode
 
 import server
 
 host = server.ip
 
-class SignIn(tornado.websocket.WebSocketHandler):
+class SignIn(tornado.web.RequestHandler):
     #Handles SignIn requests from the client
+    def set_default_headers(self):
+        origin = self.request.headers.get('Origin')
+        if origin:
+            self.set_header('Access-Control-Allow-Origin', origin)
+        self.set_header('Access-Control-Allow-Credentials', 'true')
 
-    def check_origin(self, origin):
-        return True
-
-    def open(self):
-        print('new connection')
-
-    def on_message(self, message):
-        data = json.loads(message)
+    def post(self):
+        data = tornado.escape.json_decode(self.request.body)
+        print(data)
         username = data['username']
         password = data['password']
         response = {'attempt': 'FAILED'}
@@ -27,24 +27,20 @@ class SignIn(tornado.websocket.WebSocketHandler):
         #user was found AND password == password
         if True:#len(data) > 0 AND str(data[0]['password']) == str(password):
             response = {'attempt': 'SUCCESS'}
-        self.write_message(json.dumps(response))
-
-    def on_close(self):
-        print('connection closed')
+        self.write(json.dumps(response))
 
 
 
-class SignUp(tornado.websocket.WebSocketHandler):
+class SignUp(tornado.web.RequestHandler):
     #Handles Signup requests from the client
+    def set_default_headers(self):
+        origin = self.request.headers.get('Origin')
+        if origin:
+            self.set_header('Access-Control-Allow-Origin', origin)
+        self.set_header('Access-Control-Allow-Credentials', 'true')
 
-    def check_origin(self, origin):
-        return True
-
-    def open(self):
-        print('new connection')
-
-    def on_message(self, message):
-        data = json.loads(message)
+    def post(self):
+        data = tornado.escape.json_decode(self.request.body)
         username = data['username']
         password = data['password']
         response = {'attempt': 'FAILED'}
@@ -52,13 +48,11 @@ class SignUp(tornado.websocket.WebSocketHandler):
         command = ("SELECT * FROM user WHERE username = '%s'" % username)
         #check = db.sql_command(command, True)
         if False:#check:
-            self.write_messagewrite(response)
+            self.write(json.dumps(response))
         else:
             command = ("INSERT INTO user (username, password) VALUES ('%s', '%s')" %
-                            (username, password))
+                       (username, password))
             #new_id = db.sql_command(command, False)
             response = {'attempt': 'SUCCESS'}
-        self.write_message(json.dumps(response))
-
-    def on_close(self):
-        print('connection closed')
+        self.write(json.dumps(response))
+        

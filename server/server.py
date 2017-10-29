@@ -1,24 +1,24 @@
 import tornado.ioloop
 import tornado.web
-
+import io
 
 import ProfileManager
+#import LobbyManager
 
-def readIP():
-    with open("ip", "r") as file:
+def ReadIP():
+    with io.open('./ip') as file:
         return file.read()
 
 
-ip = readIP()
+ip = ReadIP()
 url = "http://" + ip
-#list of WebSocket connections
-connections = {}
 
 def make_app():
     print("Making new app")
     return tornado.web.Application([
         (r"/SignIn", ProfileManager.SignIn),
-        (r"/SignUp", ProfileManager.SignUp)
+        (r"/SignUp", ProfileManager.SignUp)#,
+        #(r"/Lobby", LobbyManagger.Lobby)
     ],
     debug = True,
     url = url )

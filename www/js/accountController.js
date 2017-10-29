@@ -12,15 +12,6 @@ app.controller("accountController", function ($scope, $location, $http, $compile
     }
 
     $scope.finallyLoggedIn = function () {
-        /*var body = angular.element("body");
-        window.console.log(body);
-        body[0].setAttribute("md-swipe-right", "openLeft()");
-        body[0].setAttribute("md-swipe-left", "closeLeft()");
-        $scope = body.scope();
-        $injector = body.injector();
-        $injector.invoke(function($compile){
-           $compile(body)($scope)
-        })*/
         loggedIn = true;
         $location.path('/main');
         $scope.$apply();
@@ -30,52 +21,34 @@ app.controller("accountController", function ($scope, $location, $http, $compile
         if ($scope.signUpData.password != $scope.signUpData.confirmPassword) {
             window.console.log("error");
         } else {
-            var ws = new WebSocket('ws://localhost:8080/SignUp');
-
-            ws.onopen = function () {
-                var data = {
-                    username: $scope.signUpData.username,
-                    password: $scope.signUpData.password
-                }
-                ws.send(JSON.stringify(data));
+            var data = {
+                username: $scope.signUpData.username,
+                password: $scope.signUpData.password
             }
-
-            ws.onmessage = function (evt) {
-                var response = JSON.parse(evt.data);
-                if ("SUCCESS" == response.attempt) {
-                    this.close();
+            response = function (data) {
+                if ("SUCCESS" == data.attempt) {
                     $scope.finallyLoggedIn();
-                } else if ("FAILED" == response.attempt) {
+                } else if ("FAILED" == data.attempt) {
                     window.console.log("fail");
                 }
             }
-
-            ws.onclose = function () {};
+            HttpRequest.post('SignUp', data, response);
         }
     }
 
     $scope.signInSubmit = function () {
-        var ws = new WebSocket('ws://localhost:8080/SignIn');
-
-        ws.onopen = function () {
-            var data = {
-                username: $scope.signInData.username,
-                password: $scope.signInData.password
-            }
-            ws.send(JSON.stringify(data));
+        var data = {
+            username: $scope.signInData.username,
+            password: $scope.signInData.password
         }
-
-        ws.onmessage = function (evt) {
-            var response = JSON.parse(evt.data);
-            if ("SUCCESS" == response.attempt) {
-                this.close();
+        response = function (data) {
+            if ("SUCCESS" == data.attempt) {
                 $scope.finallyLoggedIn();
-            } else if ("FAILED" == response.attempt) {
+            } else if ("FAILED" == data.attempt) {
                 window.console.log("fail");
             }
         }
-
-        ws.onclose = function () { };
+        HttpRequest.post('SignUp', data, response);
     }
 
 }).directive('signin', function () {

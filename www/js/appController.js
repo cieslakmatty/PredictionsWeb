@@ -12,8 +12,8 @@ app.config(function ($routeProvider) {
             templateUrl: "templates/account/account.html",
             controller: "accountController"
         }).when("/main", {
-            templateUrl: "templates/main/mainApp.html",
-            controller: "mainController"
+            templateUrl: "templates/main/lobbies.html",
+            controller: "lobbiesController"
         })
 });
 
