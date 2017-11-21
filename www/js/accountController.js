@@ -1,4 +1,4 @@
-app.controller("accountController", function ($scope, $location, $http, $compile) {
+app.controller("accountController", function ($scope, $location) {
     $scope.currentNavItem = 'signin';
     $scope.bool_signin = true;
     $scope.signUpData = {};
@@ -13,7 +13,7 @@ app.controller("accountController", function ($scope, $location, $http, $compile
 
     $scope.finallyLoggedIn = function () {
         loggedIn = true;
-        $location.path('/main');
+        $location.path('/lobbies');
         $scope.$apply();
     }
 
@@ -27,6 +27,7 @@ app.controller("accountController", function ($scope, $location, $http, $compile
             }
             response = function (data) {
                 if ("SUCCESS" == data.attempt) {
+                    username = $scope.signUpData.username;
                     $scope.finallyLoggedIn();
                 } else if ("FAILED" == data.attempt) {
                     window.console.log("fail");
@@ -43,6 +44,7 @@ app.controller("accountController", function ($scope, $location, $http, $compile
         }
         response = function (data) {
             if ("SUCCESS" == data.attempt) {
+                username = $scope.signInData.username;
                 $scope.finallyLoggedIn();
             } else if ("FAILED" == data.attempt) {
                 window.console.log("fail");

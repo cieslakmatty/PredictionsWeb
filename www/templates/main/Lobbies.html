@@ -1,3 +1,35 @@
-<md-button ng-click="createLobby()" class="md-primary button-main">
-    Create a new lobby.
-</md-button>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>
+            <span>Lobbies</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-raised" ng-click="getLobbies()" aria-label="Learn More">
+            Refresh list
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-content class="md-padding">
+    <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+        <md-tab>
+            <md-tab-label>New lobby</md-tab-label>
+            <md-tab-body>
+                <form name=newLobby ng-submit="createNewLobby()">
+                    <md-input-container>
+                        <label>Lobby name:</label>
+                        <input name="lobbyName" type="text" ng-model="lobbyData.name" required/>
+                    </md-input-container>
+                    <br>
+                    <md-button type="submit" class="md-raised md-primary">Create a new lobby</md-button>
+                </form>
+            </md-tab-body>
+        </md-tab>
+        <md-tab ng-repeat="lobby in lobbies" ng-disabled="lobby.disabled" label="{{lobby.title}}">
+            <div class="tab lobby{{$index%1}}" style="padding: 25px; text-align: center;">
+                <div ng-bind="lobby.title"></div>
+                <md-button class="md-primary md-raised" ng-click="joinLobby()">Join lobby</md-button>
+            </div>
+        </md-tab>
+    </md-tabs>
+</md-content>

@@ -4,7 +4,6 @@ var HttpRequest = {
         xhr.open("POST", 'http://' + serverUrl + handle);
         xhr.send(JSON.stringify(data));
         xhr.onload = function () {
-            console.log(this.responseText);
             var data = JSON.parse(this.responseText);
             response(data);
         }

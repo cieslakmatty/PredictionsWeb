@@ -5,13 +5,14 @@ var app = angular.module('myApp', ['ngAnimate', 'ngMaterial', 'ngMessages', 'ngR
 
 var serverUrl = "localhost:8080/";
 var loggedIn = false;
+var username = "";
 
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
             templateUrl: "templates/account/account.html",
             controller: "accountController"
-        }).when("/main", {
+        }).when("/lobbies", {
             templateUrl: "templates/main/lobbies.html",
             controller: "lobbiesController"
         })
